@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Discover rewards, signup bonuses, and exclusive referral offers at ReferralHub.">
+<title>ReferralHub | Discover Rewards</title>
+<style>
+:root {
+  --bg:#0b1020;
+  --panel:#141e32;
+  --panel2:#1c2a43;
+  --blue:#3978f6;
+  --text:#f4f7ff;
+  --muted:#a3afc4;
+  --green:#42d6a0;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,Arial,sans-serif;
+}
+header{
+  height:76px;padding:0 7%;display:flex;
+  align-items:center;justify-content:space-between;
+  border-bottom:1px solid #253149;
+}
+.logo{font-size:23px;font-weight:800}
+.logo span{color:#5790ff}
+.nav{color:var(--muted);font-size:14px}
+.hero{
+  text-align:center;padding:85px 20px 55px;
+  background:radial-gradient(ellipse at top,#193568 0%,var(--bg) 68%);
+}
+.tag{
+  display:inline-block;padding:8px 15px;border-radius:30px;
+  color:#9bbcff;background:#192e52;
+  border:1px solid #294b80;font-size:11px;font-weight:700;
+}
+h1{font-size:clamp(40px,6vw,66px);line-height:1.08;
+  letter-spacing:-2px;margin:23px 0 16px}
+.hero p{max-width:560px;margin:auto;color:var(--muted);line-height:1.7}
+.search-wrap{max-width:540px;margin:30px auto 0}
+input{
+  width:100%;padding:16px 19px;border-radius:12px;
+  background:#18243b;border:1px solid #30415e;
+  color:white;font-size:15px;outline:none;
+}
+input:focus{border-color:var(--blue)}
+main{max-width:1120px;margin:auto;padding:35px 24px 85px}
+.heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+h2{font-size:23px;margin:0}
+.count{font-size:13px;color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.filter{
+  border:1px solid #293750;background:var(--panel);
+  color:#c1cce0;padding:10px 16px;border-radius:30px;cursor:pointer;
+}
+.filter.active{background:var(--blue);border-color:var(--blue);color:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{
+  background:var(--panel);border:1px solid #25334d;
+  border-radius:17px;padding:23px;transition:.2s;
+}
+.card:hover{transform:translateY(-4px);border-color:#4779d7}
+.card-top{display:flex;justify-content:space-between;align-items:center}
+.app-icon{
+  width:54px;height:54px;display:grid;place-items:center;
+  background:var(--panel2);border-radius:14px;font-size:28px;
+}
+.category{font-size:11px;color:#9bbcff;background:#1b3156;padding:7px 11px;border-radius:20px}
+.card h3{font-size:21px;margin:20px 0 7px}
+.reward{color:var(--green);font-weight:700;font-size:15px}
+.description{font-size:13px;color:var(--muted);line-height:1.65;min-height:44px;margin:13px 0 18px}
+.code-box{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:8px;padding:12px;background:#0d1628;
+  border:1px solid #2a3b57;border-radius:10px;margin-bottom:13px;
+}
+.code-label{font-size:11px;color:var(--muted)}
+.code-value{font-weight:800;letter-spacing:1px;margin-top:4px}
+.copy{
+  background:#263c61;color:white;border:0;padding:10px 12px;
+  border-radius:8px;cursor:pointer;
+}
+.copy:hover{background:var(--blue)}
+.visit{
+  display:block;width:100%;text-align:center;padding:13px;
+  border:0;border-radius:9px;background:var(--blue);
+  color:white;text-decoration:none;font-size:14px;font-weight:700;
+  cursor:pointer;
+}
+.visit:hover{background:#2865dc}
+.visit.disabled{background:#34415a;color:#bdc8da;cursor:not-allowed}
+.terms{font-size:11px;color:#8593aa;line-height:1.6;margin-top:12px}
+.empty{display:none;text-align:center;color:var(--muted);padding:50px}
+footer{
+  border-top:1px solid #253149;text-align:center;
+  padding:35px 20px;color:var(--muted);font-size:12px;line-height:1.9;
+}
+@media(max-width:600px){
+  header{padding:0 20px}
+  .hero{padding-top:65px}
+  main{padding-left:17px;padding-right:17px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Referral<span>Hub</span></div>
+  <div class="nav">Find rewards. Share rewards.</div>
+</header>
+
+<section class="hero">
+  <span class="tag">YOUR REFERRAL REWARDS DESTINATION</span>
+  <h1>Good deals are<br>better shared.</h1>
+  <p>
+    Discover apps, services, and referral rewards.
+    Explore my offers and find something worth signing up for!
+  </p>
+  <div class="search-wrap">
+    <input id="search" type="search"
+      placeholder="Search apps, rewards, or categories..."
+      oninput="renderCards()">
+  </div>
+</section>
+
+<main>
+  <div class="heading">
+    <h2>Explore Referral Offers</h2>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="filters">
+    <button class="filter active" onclick="setFilter('All',this)">All Offers</button>
+    <button class="filter" onclick="setFilter('Finance',this)">Finance</button>
+    <button class="filter" onclick="setFilter('Gaming',this)">Gaming & Collectibles</button>
+    <button class="filter" onclick="setFilter('Shopping',this)">Shopping</button>
+    <button class="filter" onclick="setFilter('Other',this)">Other</button>
+  </div>
+
+  <div class="grid" id="cards"></div>
+  <div class="empty" id="empty">No matching offers found.</div>
+</main>
+
+<footer>
+  <strong>ReferralHub</strong><br>
+  Sharing opportunities, one referral at a time.<br><br>
+  Referral offers, rewards, and eligibility requirements are
+  determined by each individual service and may change.<br>
+  Some links may provide a referral benefit to the website owner.
+  Please review each service's terms before signing up.<br><br>
+  © 2026 ReferralHub. All rights reserved.
+</footer>
+
+<script>
+const referrals = [
+  {
+    name:"Robinhood",
+    icon:"📈",
+    category:"Finance",
+    reward:"Free stock worth up to $50",
+    description:"Join Robinhood using my referral link and we can both receive a free stock!",
+    code:"",
+    link:"",
+    terms:"A qualifying signup and deposit are required. Rewards and eligibility are subject to Robinhood's terms."
+  },
+  {
+    name:"Streaks",
+    icon:"🎴",
+    category:"Gaming",
+    reward:"Free Pokémon card pack",
+    description:"Love opening Pokémon packs? Join Streaks with my invite code and we can both receive a free pack!",
+    code:"TTEYLHZ",
+    link:"",
+    terms:"Joining with the invite code and making a qualifying deposit are required. Subject to Streaks' terms."
+  }
+];
+
+let activeFilter="All";
+
+function setFilter(filter,button){
+  activeFilter=filter;
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  renderCards();
+}
+
+async function copyText(value,button){
+  try{
+    await navigator.clipboard.writeText(value);
+    const old=button.textContent;
+    button.textContent="Copied!";
+    setTimeout(()=>button.textContent=old,1800);
+  }catch{
+    alert("Copy wasn't available. Please copy manually: "+value);
+  }
+}
+
+function renderCards(){
+  const query=document.getElementById("search").value.toLowerCase();
+
+  const results=referrals.filter(r=>{
+    const categoryMatch=activeFilter==="All"||r.category===activeFilter;
+    const searchMatch=(r.name+" "+r.reward+" "+r.description+" "+r.category+" "+r.code).toLowerCase().includes(query);
+    return categoryMatch&&searchMatch;
+  });
+
+  document.getElementById("count").textContent=results.length+" offers";
+  document.getElementById("empty").style.display=results.length?"none":"block";
+
+  document.getElementById("cards").innerHTML=results.map(r=>`
+    <article class="card">
+      <div class="card-top">
+        <div class="app-icon">${r.icon}</div>
+        <span class="category">${r.category}</span>
+      </div>
+      <h3>${r.name}</h3>
+      <div class="reward">${r.reward}</div>
+      <p class="description">${r.description}</p>
+      ${r.code?`
+        <div class="code-box">
+          <div>
+            <div class="code-label">INVITE CODE</div>
+            <div class="code-value">${r.code}</div>
+          </div>
+          <button class="copy" onclick="copyText('${r.code}',this)">Copy Code</button>
+        </div>
+      `:`
+        <div class="code-box">
+          <div>
+            <div class="code-label">REFERRAL ACCESS</div>
+            <div class="code-value">Link coming soon</div>
+          </div>
+        </div>
+      `}
+      ${r.link?`
+        <a class="visit" href="${r.link}" target="_blank" rel="noopener noreferrer">Claim Referral Offer →</a>
+      `:`
+        <button class="visit disabled" disabled>Referral link coming soon</button>
+      `}
+      <div class="terms">${r.terms}</div>
+    </article>
+  `).join("");
+}
+
+renderCards();
+</script>
+</body>
+</html>
