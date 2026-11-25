@@ -1,252 +1,38 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Discover rewards, signup bonuses, and exclusive referral offers at ReferralHub.">
-<title>ReferralHub | Discover Rewards</title>
-<style>
-:root {
-  --bg:#0b1020;
-  --panel:#141e32;
-  --panel2:#1c2a43;
-  --blue:#3978f6;
-  --text:#f4f7ff;
-  --muted:#a3afc4;
-  --green:#42d6a0;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Inter,system-ui,Arial,sans-serif;
-}
-header{
-  height:76px;padding:0 7%;display:flex;
-  align-items:center;justify-content:space-between;
-  border-bottom:1px solid #253149;
-}
-.logo{font-size:23px;font-weight:800}
-.logo span{color:#5790ff}
-.nav{color:var(--muted);font-size:14px}
-.hero{
-  text-align:center;padding:85px 20px 55px;
-  background:radial-gradient(ellipse at top,#193568 0%,var(--bg) 68%);
-}
-.tag{
-  display:inline-block;padding:8px 15px;border-radius:30px;
-  color:#9bbcff;background:#192e52;
-  border:1px solid #294b80;font-size:11px;font-weight:700;
-}
-h1{font-size:clamp(40px,6vw,66px);line-height:1.08;
-  letter-spacing:-2px;margin:23px 0 16px}
-.hero p{max-width:560px;margin:auto;color:var(--muted);line-height:1.7}
-.search-wrap{max-width:540px;margin:30px auto 0}
-input{
-  width:100%;padding:16px 19px;border-radius:12px;
-  background:#18243b;border:1px solid #30415e;
-  color:white;font-size:15px;outline:none;
-}
-input:focus{border-color:var(--blue)}
-main{max-width:1120px;margin:auto;padding:35px 24px 85px}
-.heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-h2{font-size:23px;margin:0}
-.count{font-size:13px;color:var(--muted)}
-.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
-.filter{
-  border:1px solid #293750;background:var(--panel);
-  color:#c1cce0;padding:10px 16px;border-radius:30px;cursor:pointer;
-}
-.filter.active{background:var(--blue);border-color:var(--blue);color:white}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.card{
-  background:var(--panel);border:1px solid #25334d;
-  border-radius:17px;padding:23px;transition:.2s;
-}
-.card:hover{transform:translateY(-4px);border-color:#4779d7}
-.card-top{display:flex;justify-content:space-between;align-items:center}
-.app-icon{
-  width:54px;height:54px;display:grid;place-items:center;
-  background:var(--panel2);border-radius:14px;font-size:28px;
-}
-.category{font-size:11px;color:#9bbcff;background:#1b3156;padding:7px 11px;border-radius:20px}
-.card h3{font-size:21px;margin:20px 0 7px}
-.reward{color:var(--green);font-weight:700;font-size:15px}
-.description{font-size:13px;color:var(--muted);line-height:1.65;min-height:44px;margin:13px 0 18px}
-.code-box{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:8px;padding:12px;background:#0d1628;
-  border:1px solid #2a3b57;border-radius:10px;margin-bottom:13px;
-}
-.code-label{font-size:11px;color:var(--muted)}
-.code-value{font-weight:800;letter-spacing:1px;margin-top:4px}
-.copy{
-  background:#263c61;color:white;border:0;padding:10px 12px;
-  border-radius:8px;cursor:pointer;
-}
-.copy:hover{background:var(--blue)}
-.visit{
-  display:block;width:100%;text-align:center;padding:13px;
-  border:0;border-radius:9px;background:var(--blue);
-  color:white;text-decoration:none;font-size:14px;font-weight:700;
-  cursor:pointer;
-}
-.visit:hover{background:#2865dc}
-.visit.disabled{background:#34415a;color:#bdc8da;cursor:not-allowed}
-.terms{font-size:11px;color:#8593aa;line-height:1.6;margin-top:12px}
-.empty{display:none;text-align:center;color:var(--muted);padding:50px}
-footer{
-  border-top:1px solid #253149;text-align:center;
-  padding:35px 20px;color:var(--muted);font-size:12px;line-height:1.9;
-}
-@media(max-width:600px){
-  header{padding:0 20px}
-  .hero{padding-top:65px}
-  main{padding-left:17px;padding-right:17px}
-}
-</style>
-</head>
-<body>
-
-<header>
-  <div class="logo">Referral<span>Hub</span></div>
-  <div class="nav">Find rewards. Share rewards.</div>
-</header>
-
-<section class="hero">
-  <span class="tag">YOUR REFERRAL REWARDS DESTINATION</span>
-  <h1>Good deals are<br>better shared.</h1>
-  <p>
-    Discover apps, services, and referral rewards.
-    Explore my offers and find something worth signing up for!
-  </p>
-  <div class="search-wrap">
-    <input id="search" type="search"
-      placeholder="Search apps, rewards, or categories..."
-      oninput="renderCards()">
-  </div>
-</section>
-
-<main>
-  <div class="heading">
-    <h2>Explore Referral Offers</h2>
-    <span class="count" id="count"></span>
-  </div>
-
-  <div class="filters">
-    <button class="filter active" onclick="setFilter('All',this)">All Offers</button>
-    <button class="filter" onclick="setFilter('Finance',this)">Finance</button>
-    <button class="filter" onclick="setFilter('Gaming',this)">Gaming & Collectibles</button>
-    <button class="filter" onclick="setFilter('Shopping',this)">Shopping</button>
-    <button class="filter" onclick="setFilter('Other',this)">Other</button>
-  </div>
-
-  <div class="grid" id="cards"></div>
-  <div class="empty" id="empty">No matching offers found.</div>
-</main>
-
-<footer>
-  <strong>ReferralHub</strong><br>
-  Sharing opportunities, one referral at a time.<br><br>
-  Referral offers, rewards, and eligibility requirements are
-  determined by each individual service and may change.<br>
-  Some links may provide a referral benefit to the website owner.
-  Please review each service's terms before signing up.<br><br>
-  © 2026 ReferralHub. All rights reserved.
-</footer>
-
-<script>
-const referrals = [
-  {
-    name:"Robinhood",
-    icon:"📈",
-    category:"Finance",
-    reward:"Free stock worth up to $50",
-    description:"Join Robinhood using my referral link and we can both receive a free stock!",
-    code:"",
-    link:"",
-    terms:"A qualifying signup and deposit are required. Rewards and eligibility are subject to Robinhood's terms."
-  },
-  {
-    name:"Streaks",
-    icon:"🎴",
-    category:"Gaming",
-    reward:"Free Pokémon card pack",
-    description:"Love opening Pokémon packs? Join Streaks with my invite code and we can both receive a free pack!",
-    code:"TTEYLHZ",
-    link:"",
-    terms:"Joining with the invite code and making a qualifying deposit are required. Subject to Streaks' terms."
-  }
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ReferralHub | Discover rewards and referral offers</title><meta name="description" content="Explore 24 referral offers for walking, gaming, shopping, Bitcoin and more. Find invite codes and signup rewards in one place."><link rel="canonical" href="https://referralhub.live/"><meta property="og:title" content="ReferralHub — Good deals are better shared"><meta property="og:description" content="Discover referral offers, invite codes and everyday rewards."><meta property="og:url" content="https://referralhub.live/"><meta property="og:type" content="website"><meta name="theme-color" content="#0b1220"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233b82f6'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='32' font-family='Arial' font-weight='bold' fill='white'%3ER%3C/text%3E%3C/svg%3E"><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#0b1220;color:#eaf0fc;font:16px/1.55 system-ui,sans-serif}a{color:#9cc5ff}button,input,select{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}.wrap{max-width:1180px;margin:auto;padding:0 24px}header{border-bottom:1px solid #25334a}nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px}.brand{font-weight:850;font-size:23px;color:white;text-decoration:none}.brand span{color:#60a5fa}.navlinks{display:flex;gap:20px;font-size:14px}.hero{padding:76px 0 48px;background:radial-gradient(ellipse at 75% 0%,#19376a 0%,transparent 65%)}.eyebrow{color:#93c5fd;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}h1{font-size:clamp(40px,7vw,76px);line-height:1.04;letter-spacing:-.05em;margin:16px 0;max-width:780px}h1 span{color:#78b4ff}h2{font-size:28px;letter-spacing:-.025em;margin:0 0 12px}p{margin:0 0 12px}.muted{color:#aab9d0}.hero p{max-width:650px;font-size:18px}.primary{display:inline-block;background:#8bbaff;color:#071528;border:0;border-radius:10px;padding:11px 17px;font-weight:750;text-decoration:none}.stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap}.stats strong{display:block;font-size:26px}.stats span{font-size:13px;color:#aab9d0}.notice{padding:14px 18px;border:1px solid #344664;background:#111d31;border-radius:12px;font-size:13px;color:#c4d1e5;margin:20px 0 36px}section{margin-bottom:42px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{background:#131f33;border:1px solid #293951;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}.top{display:flex;align-items:center;gap:12px}.mark{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-weight:850;font-size:17px;flex:none;background:#263b59;color:#b9d8ff}.card h3{margin:0;font-size:20px}.category{font-size:12px;color:#aab9d0}.bonus{color:#86efac;font-weight:750;font-size:15px}.desc{color:#c6d2e4;font-size:14px}.details{font-size:13px;color:#b5c4d9;margin:0;padding-left:18px}.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:11px;background:#24334b;border-radius:6px;padding:3px 7px;color:#c5d6ed}.actions{margin-top:auto;display:grid;gap:8px}.code{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0b1425;border:1px dashed #425574;padding:8px 10px;border-radius:8px;overflow-wrap:anywhere}.code button,.chip,.secondary{background:#18263d;border:1px solid #344664;color:#eaf0fc;border-radius:9px;padding:8px 12px}.actions .primary{text-align:center}.collections{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.collection{text-align:left;padding:16px;background:#14223a;color:#eaf0fc;border:1px solid #30415d;border-radius:12px;font-weight:700}.collection small{display:block;color:#aab9d0;font-weight:400}.filters{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.filters input{flex:1;min-width:180px}.filters input,.filters select{background:#111d31;color:#eaf0fc;border:1px solid #40516d;border-radius:10px;padding:12px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.chip[aria-pressed=true]{background:#8bbaff;color:#071528;border-color:#8bbaff}.count{margin:12px 0;color:#aab9d0;font-size:14px}footer{border-top:1px solid #293951;padding:28px 0;color:#aab9d0;font-size:13px}.empty{padding:32px;border:1px dashed #40516d;border-radius:12px}.toast{position:fixed;bottom:20px;right:20px;background:#eaf0fc;color:#0b1220;padding:12px 18px;border-radius:10px;z-index:2;max-width:90vw}.toast:empty{display:none}@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.wrap{padding:0 16px}.grid,.collections{grid-template-columns:1fr}.hero{padding:48px 0 30px}.navlinks{gap:10px;font-size:12px}.brand{font-size:19px}.stats{gap:20px}.filters select{width:100%}}
+</style></head><body><header><nav class="wrap"><a class="brand" href="#">Referral<span>Hub</span></a><div class="navlinks"><a href="#collections">Collections</a><a href="#directory">All offers</a></div></nav></header><main><div class="hero"><div class="wrap"><div class="eyebrow">Discover · Earn · Share</div><h1>Good deals are <span>better shared.</span></h1><p class="muted">Find referral codes, welcome bonuses and everyday reward apps — all in one place.</p><a class="primary" href="#directory">Explore all offers</a> <button class="secondary" id="share">Share ReferralHub</button><div class="stats"><div><strong id="total">24</strong><span>Referral offers</span></div><div><strong>6</strong><span>Categories</span></div><div><strong>20</strong><span>Direct referral links</span></div></div></div></div><div class="wrap"><aside class="notice"><strong>Referral disclosure:</strong> I may receive rewards when you use my links or codes. Offers are based on submitted information and may change. Check each provider's current terms before signing up or spending money. Earnings are not guaranteed.</aside><section><div class="eyebrow">Welcome rewards</div><h2>Featured offers</h2><div class="grid" id="featured"></div></section><section id="collections"><h2>Explore collections</h2><div class="collections" id="collectionList"></div></section><section id="directory"><div class="eyebrow">Find your next reward</div><h2>All referral offers</h2><div class="filters"><input id="search" type="search" placeholder="Search apps, rewards or payout methods" aria-label="Search offers"><select id="benefit" aria-label="Filter by benefit"><option value="">All benefits</option></select><button class="secondary" id="reset">Reset filters</button></div><div class="chips" id="categories"></div><div class="count" id="count" aria-live="polite"></div><div class="grid" id="offers"></div><noscript>Enable JavaScript to browse the referral directory.</noscript></section></div></main><footer><div class="wrap"><strong>ReferralHub</strong> · Independent referral directory<p>Not affiliated with the listed apps. Cryptocurrency and investing involve risk of loss. Random card packs may have variable value; do not spend solely to obtain a reward. Offer terms and availability may change.</p><a href="#">Back to top</a></div></footer><div class="toast" id="toast" role="status"></div><script>
+// EDIT THIS DATA ARRAY TO ADD OR UPDATE OFFERS.
+const F='Investing & Finance',G='Gaming & Collectibles',H='Health & Fitness',P='Play & Earn',C='Crypto & Bitcoin Rewards',S='Cashback & Shopping Rewards';
+// name, category, description, bonus, details, URL, code, tags, secondary category
+const data=[
+['Robinhood',F,'Investing and stock trading platform.','Free stock worth up to $50 for eligible new users',['Qualifying signup and deposit required','Investing involves risk of loss'],'https://join.robinhood.com/hood-c091ba4ea','',['Welcome bonus']],
+['Streaks',G,'Open Pokemon card packs.','Free pack for both users',['Join and make a qualifying deposit'],'https://streaks-app.com/r/TTEYLHZ?via=invite','TTEYLHZ',['Welcome bonus','Card packs']],
+['Crown Cards',G,'Card pack opening with daily rewards.','Free pack for both users, potentially worth up to $1,000',['$20 deposit required for referral pack','Daily rewards reported without purchase','Pack value varies'],'https://cc.link/r/LBCYZS96','LBCYZS96',['Welcome bonus','Card packs']],
+['AHealth',H,'Earn points for walking, running, drinking water and completing activities.','',['Surveys, videos and offerwalls'],'https://api.ahealth.app/s/wnbnjI46w9','',['Walking']],
+['BestPlay',P,'Play in-house games and participate in contests.','200,000 starting coins',['Coins convert to cash periodically','Exact payout interval and minimum pending confirmation'],'https://bestplay.onelink.me/IZ8a/u57kti6e','',['Welcome bonus','Gaming']],
+['Bitcoin Mining',C,'Earn BTC rewards by watching advertisements.','',['Reported minimum: 20 sats','Compatible Lightning wallets including ZBD and Speed','Exact app listing pending confirmation'],'','ISNHTJ',['Bitcoin','Lightning']],
+['Blingz',P,'Play in-house games for rewards.','Welcome coin bonus',['Reported three-hour payout cycles','Exact minimum withdrawal pending confirmation'],'https://blingz.onelink.me/Wjj2/wgnw64pr','',['Welcome bonus','Gaming']],
+['Cashwalk',H,'Earn points from daily steps, surveys and offerwalls.','400+ bonus coins',['Complete seven daily sign-ins'],'','NAN6G',['Walking','Welcome bonus']],
+['Cointiply',C,'Bitcoin faucet with mini-games, offerwalls, challenges and paid-to-click ads.','',['BTC withdrawal: 50,000 coins (about $5)','Other crypto minimums vary'],'https://labs.cointiply.com/i/qzVflhq1MfMP','',['Bitcoin']],
+['Daily Gift',P,'Earn rewards through short ads and offerwalls.','',['Reported $1 minimum cash-out','Multiple payout options'],'https://app.appsflyer.com/id6775441965?pid=af_app_invites&c=referral&deep_link_sub2=RKQCDVHN&af_sub3=ref_RKQCDVHN','',['Low cash-out']],
+['GeoSmile',H,'Track steps and earn gems redeemable for gift cards.','',['Reported $5 minimum and same-day redemption','Available on iOS'],'','iKx7xv1aC',['Walking','Gift cards','Same-day payouts']],
+['Macadam',H,'Free walking rewards app.','1,000 welcome coins',['Sign up using the referral code'],'https://macadam.app/i/ncxz6b?v=1','NCXZ6B',['Walking','Welcome bonus']],
+['MintPull',G,'Pokemon card opening with daily bonus rewards.','Free welcome card pack',['Check eligibility and any deposit requirements'],'https://mintpullios.onelink.me/neMv/86iumkry?invite_code=BEG4A7','BEG4A7',['Welcome bonus','Card packs']],
+['Mooney',H,'Walking rewards, surveys and offerwalls. The site owner reports consistent rewards.','',['Reported $5 minimum cash-out','PayPal and other payout options'],'https://mooney.gg/r/VSCJKAAXZHRD89B3','',['Walking','PayPal']],
+['Pogo',S,'Earn rewards on purchases without scanning receipts.','250 bonus points',['Earn 5,000 points first','Free to join'],'https://pogocash.app.link/QDZL39','QDZL39',['Welcome bonus','Shopping']],
+['sMiles',C,'Earn satoshis by walking and completing daily tasks.','',['Reported 1,000 sats withdrawal minimum','Compatible Lightning wallets'],'https://join.smilesbitcoin.com/zacharygallagher845','',['Bitcoin','Walking','Lightning'],H],
+['ZBD',C,'Bitcoin Lightning wallet with surveys, offerwalls and paid ads.','$2 in Bitcoin',['Referral signup and identity verification required'],'https://zbd.link/hcHi/invite?af_sub1=98VYI6&deep_link_value=fwb_two_for_two','',['Welcome bonus','Bitcoin','Lightning']],
+['Try Rewards',P,'Get paid to play games and earn daily cash login bonuses.','Daily cash login bonuses',[],'https://tryrewards.com/ref/3W1RGIKCD3','',['Gaming','Daily bonuses']],
+['Big Cash',P,'Earn rewards by playing games and completing offers.','Free welcome coins',['Reported $1 minimum cash-out'],'https://bigcashweb.com?ref=i05xhi90','',['Gaming','Welcome bonus','Low cash-out']],
+['Crypto.com',C,'Buy, sell and trade cryptocurrency.','Up to $100 USD welcome bonus',['Qualifying trading activity and eligibility required','Trading involves risk of loss'],'https://crypto.com/app/g7njghhqkz','g7njghhqkz',['Welcome bonus'],F],
+['EarnStar',P,'Play games and complete offers with bonus cash incentives.','',['Reported same-day payouts','Low cash-out minimum; exact amount not supplied'],'https://earnstar.com/register?ref=a20cf9b0-ed52-4a7f-a03c-fec6d2fba57d','',['Gaming','Same-day payouts']],
+['ByPet',C,'Earn BTC rewards by watching ads; optional virtual pets increase in-app hashrate.','',['Purchases optional; returns not guaranteed','Reported iOS and Android availability'],'','YMDYIH',['Bitcoin']],
+['Ibotta',S,'Earn cash back on qualifying grocery and retail purchases.','',['Receipt scanning or linked retailer accounts where supported'],'https://ibotta.onelink.me/iUfE/1005cd3f?friend_code=thwtbbk','thwtbbk',['Shopping']],
+['Mistplay',P,'Discover mobile games and earn points redeemable for available gift cards.','',[],'https://mistplay.onelink.me/ZGRQ/bul6za8n','',['Gaming','Gift cards']]
 ];
-
-let activeFilter="All";
-
-function setFilter(filter,button){
-  activeFilter=filter;
-  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-  button.classList.add("active");
-  renderCards();
-}
-
-async function copyText(value,button){
-  try{
-    await navigator.clipboard.writeText(value);
-    const old=button.textContent;
-    button.textContent="Copied!";
-    setTimeout(()=>button.textContent=old,1800);
-  }catch{
-    alert("Copy wasn't available. Please copy manually: "+value);
-  }
-}
-
-function renderCards(){
-  const query=document.getElementById("search").value.toLowerCase();
-
-  const results=referrals.filter(r=>{
-    const categoryMatch=activeFilter==="All"||r.category===activeFilter;
-    const searchMatch=(r.name+" "+r.reward+" "+r.description+" "+r.category+" "+r.code).toLowerCase().includes(query);
-    return categoryMatch&&searchMatch;
-  });
-
-  document.getElementById("count").textContent=results.length+" offers";
-  document.getElementById("empty").style.display=results.length?"none":"block";
-
-  document.getElementById("cards").innerHTML=results.map(r=>`
-    <article class="card">
-      <div class="card-top">
-        <div class="app-icon">${r.icon}</div>
-        <span class="category">${r.category}</span>
-      </div>
-      <h3>${r.name}</h3>
-      <div class="reward">${r.reward}</div>
-      <p class="description">${r.description}</p>
-      ${r.code?`
-        <div class="code-box">
-          <div>
-            <div class="code-label">INVITE CODE</div>
-            <div class="code-value">${r.code}</div>
-          </div>
-          <button class="copy" onclick="copyText('${r.code}',this)">Copy Code</button>
-        </div>
-      `:`
-        <div class="code-box">
-          <div>
-            <div class="code-label">REFERRAL ACCESS</div>
-            <div class="code-value">Link coming soon</div>
-          </div>
-        </div>
-      `}
-      ${r.link?`
-        <a class="visit" href="${r.link}" target="_blank" rel="noopener noreferrer">Claim Referral Offer →</a>
-      `:`
-        <button class="visit disabled" disabled>Referral link coming soon</button>
-      `}
-      <div class="terms">${r.terms}</div>
-    </article>
-  `).join("");
-}
-
-renderCards();
-</script>
-</body>
-</html>
+const $=id=>document.getElementById(id);const el=(tag,cls,txt)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(txt)n.textContent=txt;return n};let active='';let timer;function notify(t){$('toast').textContent=t;clearTimeout(timer);timer=setTimeout(()=>$('toast').textContent='',3500)}async function copy(t){try{await navigator.clipboard.writeText(t);notify('Copied!')}catch{window.prompt('Copy this text:',t)}}
+function card(d){const [name,cat,desc,bonus,details,url,code,tags,secondary]=d;const a=el('article','card'),top=el('div','top'),mark=el('div','mark',name.replace(/[^a-z0-9 ]/gi,'').split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase()||'R'),head=el('div');mark.setAttribute('aria-hidden','true');head.append(el('h3','',name),el('div','category',cat));top.append(mark,head);a.append(top);if(bonus)a.append(el('div','bonus',bonus));a.append(el('p','desc',desc));if(details.length){const ul=el('ul','details');details.forEach(x=>ul.append(el('li','',x)));a.append(ul)}const ts=el('div','tags');tags.forEach(t=>ts.append(el('span','tag',t)));if(secondary)ts.append(el('span','tag',secondary));a.append(ts);const actions=el('div','actions');if(code){const c=el('div','code'),b=el('button','','Copy');b.type='button';b.setAttribute('aria-label','Copy '+name+' invite code');b.onclick=()=>copy(code);c.append(el('strong','',code),b);actions.append(c)}if(url){const link=el('a','primary','Join '+name+' ↗');link.href=url;link.target='_blank';link.rel='sponsored noopener noreferrer';actions.append(link)}else{actions.append(el('div','category','Invite code only · official download link pending'))}a.append(actions);return a}
+const cats=[P,C,H,G,S,F];function render(){const q=$('search').value.trim().toLowerCase(),b=$('benefit').value;const rows=data.filter(d=>(!active||d[1]===active||d[8]===active)&&(!b||d[7].includes(b))&&(!q||d.flat(2).join(' ').toLowerCase().includes(q)));$('offers').replaceChildren(...rows.map(card));$('count').textContent=`Showing ${rows.length} of ${data.length} offers`;if(!rows.length)$('offers').append(el('p','empty','No matching offers. Try another search or reset filters.'));document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.cat===active)))}
+for(const c of ['',...cats]){const b=el('button','chip',c||'All categories');b.dataset.cat=c;b.onclick=()=>{active=c;render()};$('categories').append(b)}for(const t of [...new Set(data.flatMap(d=>d[7]))].sort()){const o=el('option','',t);o.value=t;$('benefit').append(o)}
+const collections=[['Get Paid to Walk','Walking','Turn steps into rewards'],['Start Stacking Sats','Bitcoin','Explore Bitcoin reward apps'],['Get Paid to Play','Gaming','Discover gaming rewards'],['Pokemon Card Packs','Card packs','Check pack eligibility'],['Low Minimum Cash-Outs','Low cash-out','Reported minimums of $1 or less'],['Earn While You Shop','Shopping','Cashback and purchase rewards']];for(const [name,tag,desc] of collections){const b=el('button','collection',name);b.append(el('small','',desc));b.onclick=()=>{active='';$('search').value='';$('benefit').value=tag;render();$('directory').scrollIntoView()};$('collectionList').append(b)}$('featured').append(...['Macadam','ZBD','Pogo'].map(n=>card(data.find(d=>d[0]===n))));$('search').addEventListener('input',render);$('benefit').addEventListener('change',render);$('reset').onclick=()=>{active='';$('search').value='';$('benefit').value='';render()};$('share').onclick=async()=>{if(navigator.share){try{await navigator.share({title:'ReferralHub',url:'https://referralhub.live/'})}catch(e){if(e.name!=='AbortError')copy('https://referralhub.live/')}}else copy('https://referralhub.live/')};render();
+</script></body></html>
